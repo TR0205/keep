@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand navbar-dark blue-gradient">
+<nav class="navbar navbar-expand navbar-dark" style="background-color: #21a48f;">
 
   <a class="navbar-brand" href="/"><i class="far fa-comment mr-1"></i>Keep!!</a>
 

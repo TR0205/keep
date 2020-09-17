@@ -59,11 +59,11 @@
 
     </div>
     <div class="card-body pt-0 pb-2">
-      <h3 class="h4 card-title">
+      <div class="card-title">
         <a class="text-dark" href="{{ route('articles.show', ['article' => $article]) }}">
           {{ $article->title }}
         </a>
-      </h3>
+</div>
       <div class="card-text">
         {!! nl2br(e( $article->body )) !!}
       </div>

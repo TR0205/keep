@@ -63,7 +63,7 @@
         <a class="text-dark" href="{{ route('articles.show', ['article' => $article]) }}">
           {{ $article->title }}
         </a>
-</div>
+      </div>
       <div class="card-text">
         {!! nl2br(e( $article->body )) !!}
       </div>
@@ -91,5 +91,5 @@
         </div>
       </div>
     @endif
-  @endforeach
+    @endforeach
   </div>

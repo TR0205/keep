@@ -83,6 +83,16 @@
       </article-like>
     </div>
   </div>
+
+  <!-- 画像を表示 -->
+  <div class="card-body pt-0 pb-2 pl-3">
+    <div class="card-text">
+    @if ($article->image_path)
+      <img src="{{ $article->image_path }}">
+    @endif
+    </div>
+  </div>
+
   @foreach($article->tags as $tag)
     @if($loop->first)
       <div class="card-body pt-0 pb-4 pl-3">

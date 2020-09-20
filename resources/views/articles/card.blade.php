@@ -23,7 +23,7 @@
             </button>
           </a>
           <div class="dropdown-menu dropdown-menu-right">
-            <a class="dropdown-item" href="{{ route('articles.edit', ['article' => $article]) }}">
+            <a class="dropdown-item" href="{{ route("articles.edit", ['article' => $article]) }}">
               <i class="fas fa-pen mr-1"></i>記事を更新する
             </a>
             <div class="dropdown-divider"></div>
@@ -63,7 +63,7 @@
 
   </div>
   <div class="card-body pt-0 pb-2">
-    <h3 class="card-title">
+    <h3 class="h4 card-title">
       <a class="text-dark" href="{{ route('articles.show', ['article' => $article]) }}">
         {{ $article->title }}
       </a>

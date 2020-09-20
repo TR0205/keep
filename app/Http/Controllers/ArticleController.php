@@ -39,9 +39,12 @@ class ArticleController extends Controller
         $article->fill($request->all());
         $article->user_id = $request->user()->id;
 
-        $image = $request->file('image');
-        $path = Storage::disk('s3')->putFile('keepbacket', $image, 'public');
-        $article->image_path = Storage::disk('s3')->url($path);
+        if ($request->has('image'))
+        {
+            $image = $request->file('image');
+            $path = Storage::disk('s3')->putFile('keepbacket', $image, 'public');
+            $article->image_path = Storage::disk('s3')->url($path);
+        }
 
         $article->save();
 

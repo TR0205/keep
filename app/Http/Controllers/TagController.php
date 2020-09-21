@@ -15,11 +15,31 @@ class TagController extends Controller
         return view('tags.show', ['tag' => $tag]);
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $tags = Tag::all()->sortByDesc('created_at');
+        $search = $request->input('search');
 
-        return view('tags.index',['tags' => $tags]);
+        $query = DB::table('tags');
+        if($search !==null)
+        {
+            $search_split = mb_convert_kana($search, 's');
+            $search_split2 = preg_split('/[\s]+/', $search_split, -1, PREG_SPLIT_NO_EMPTY);
+
+            foreach($search_split2 as $value)
+            {
+                $query->where('name', 'like', '%'.$value.'%');
+            }
+        };
+
+        $query->select('id', 'name');
+        $query->orderBy('created_at', 'asc');
+        $tags = $query->paginate(20);
+
+        return view('tags.index', compact('tags'));
+
+
+        //$tags = Tag::all()->sortByDesc('created_at');
+        //return view('tags.index',['tags' => $tags]);
     }
 
     public function card_test()

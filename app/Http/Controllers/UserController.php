@@ -87,4 +87,16 @@ class UserController extends Controller
 
         return ['name' => $name];
     }
+
+    public function edit(string $name)
+    {
+        return view('users.edit', ['name' => $name]);
+    }
+
+    public function update(ArticleRequest $request, User $user)
+    {
+        $user->fill($request->all())->save();
+
+        return redirect()->route('users.edit', ['user' => $user]);
+    }
 }

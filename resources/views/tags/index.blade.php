@@ -13,7 +13,6 @@
         <div class="card-body pt-0 pb-4 pl-3">
           <div class="card-text line-height">
             <a href="{{ route('tags.show', ['name' => $tag->name]) }}" class="border p-1 mr-1 mt-1 text-muted">
-              {{ $tag->hashtag }}
             </a>
           </div>
         </div>
@@ -38,7 +37,7 @@
         <div class="card-body pt-0 pb-4 pl-3">
           <div class="card-text line-height">
             <a href="{{ route('tags.show', ['name' => $tag->name]) }}" class="border p-1 mr-1 mt-1 text-muted">
-              {{ $tag->hashtag }}
+              {{ $tag->name }}
             </a>
           </div>
         </div>

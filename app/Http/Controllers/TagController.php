@@ -35,6 +35,8 @@ class TagController extends Controller
         $query->orderBy('created_at', 'asc');
         $tags = $query->paginate(20);
 
+        //dd($tags);
+
         return view('tags.index', compact('tags'));
 
 
@@ -47,14 +49,4 @@ class TagController extends Controller
         return view('tags.card_test');
     }
 
-    public function search()
-    {
-        $tags = DB::table('tags')
-        ->select('id', 'name')
-        ->get();
-
-        dd($tags);
-        return view('tags.index');
-
-    }
 }

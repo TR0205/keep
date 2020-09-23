@@ -90,13 +90,19 @@ class UserController extends Controller
 
     public function edit(string $name)
     {
-        return view('users.edit', ['name' => $name]);
+        $user = User::where('name', $name)->first();
+        // dd($user);
+        return view('users.edit', ['user' => $user]);
     }
 
-    public function update(ArticleRequest $request, User $user)
+    public function update(Request $request, $name)
     {
+        $user = User::where('name', $name)->first();
+        dd($name);
+
+
         $user->fill($request->all())->save();
 
-        return redirect()->route('users.edit', ['user' => $user]);
+        return redirect()->route('users.edit', ['user' => $user->name]);
     }
 }

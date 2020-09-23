@@ -11,10 +11,10 @@
         <div class="card mt-3">
           <div class="card-body pt-0">
             @include('error_card_list')
-            <form method="POST" action="{{ route('users.update', ['name' => $name]) }}">
             <div class="card-text">
-                @method('PATCH')
+              <form method="POST" action="{{ route('users.update', ['name' => $user->name]) }}">
                 @include('users.form')
+                @method('PATCH')
                 <button type="submit" class="btn btn-block text-white" style="background-color: #21a48f;">更新する</button>
               </form>
             </div>

@@ -26,7 +26,7 @@
                   <label for="email">メールアドレス</label>
                   <input class="form-control" type="text" id="email" name="email" required>
                 </div>
-                <button class="btn btn-block blue-gradient mt-2 mb-2" type="submit">メール送信</button>
+                <button class="btn btn-block text-white mt-2 mb-2" style="background-color: #21a48f;" type="submit">メール送信</button>
               </form>
 
             </div>

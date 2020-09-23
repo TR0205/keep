@@ -98,10 +98,19 @@ class UserController extends Controller
     public function update(Request $request, $name)
     {
         $user = User::where('name', $name)->first();
-
         $user->fill($request->all())->save();
         // dd($user);
 
-        return redirect()->route('users.edit', ['user' => $user]);
+        $articles = $user->articles->sortByDesc('created_at');
+
+        return view('users.show', [
+            'user' => $user,
+            'articles' => $articles,
+        ]);
+
+        // return redirect()->route('users.show', [
+        //     'user' => $user->name,
+        //     'articles' => $articles,
+        //     ]);
     }
 }

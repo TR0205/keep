@@ -5,7 +5,7 @@
         <i class="fas fa-user-circle fa-3x"></i>
       </a>
       @if( Auth::id() === $user->id )
-        <button type="button" class="btn btn-primary">ユーザー情報の編集</button>
+        <a class="btn btn-primary" href="{{ route('users.edit', ['name' => $user->name]) }}" role="button">ユーザー情報の編集</a>
       @endif
 
       @if( Auth::id() !== $user->id )

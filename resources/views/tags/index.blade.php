@@ -8,16 +8,6 @@
     <div class="card-body text-center">
       <h2 class="h3 card-title text-center mt-4">人気タグ TOP5</h2>
     </div>
-    <div class="card m-1 p-3 d-flex flex-row flex-wrap">
-      @foreach($tags as $tag)
-        <div class="card-body pt-0 pb-4 pl-3">
-          <div class="card-text line-height">
-            <a href="{{ route('tags.show', ['name' => $tag->name]) }}" class="border p-1 mr-1 mt-1 text-muted">
-            </a>
-          </div>
-        </div>
-      @endforeach
-    </div>
 
     <div class="card-body text-center">
       <h2 class="h3 card-title text-center mt-4">タグ検索</h2>
@@ -37,7 +27,7 @@
         <div class="card-body pt-0 pb-4 pl-3">
           <div class="card-text line-height">
             <a href="{{ route('tags.show', ['name' => $tag->name]) }}" class="border p-1 mr-1 mt-1 text-muted">
-              {{ $tag->name }}
+              #{{ $tag->name }}
             </a>
           </div>
         </div>

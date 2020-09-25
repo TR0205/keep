@@ -33,15 +33,9 @@ class TagController extends Controller
 
         $query->select('id', 'name');
         $query->orderBy('created_at', 'asc');
-        $tags = $query->paginate(20);
-
-        //dd($tags);
+        $tags = $query->get();
 
         return view('tags.index', compact('tags'));
-
-
-        //$tags = Tag::all()->sortByDesc('created_at');
-        //return view('tags.index',['tags' => $tags]);
     }
 
     public function card_test()

@@ -6,10 +6,6 @@
   @include('nav')
   <div class="container">
     <div class="card-body text-center">
-      <h2 class="h3 card-title text-center mt-4">人気タグ TOP5</h2>
-    </div>
-
-    <div class="card-body text-center">
       <h2 class="h3 card-title text-center mt-4">タグ検索</h2>
     </div>
     <nav class="navbar navbar-light">

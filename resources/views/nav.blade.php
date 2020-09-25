@@ -16,7 +16,6 @@
     </li>
     @endguest
 
-    <!-- タグ検索追加 -->
     @auth
     <li class="nav-item">
       <a class="nav-link" href="{{ route('tags.index') }}"><i class="fas fa-search mr-1"></i>タグ検索</a>

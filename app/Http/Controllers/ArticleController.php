@@ -19,8 +19,13 @@ class ArticleController extends Controller
     public function index()
     {
         $articles = Article::all()->sortByDesc('created_at')->load(['user','likes', 'tags']);
+        $tags = Tag::withCount('articles')->orderBy('articles_count', 'desc')->take(5)->get();
+        // dd($tags);
 
-        return view('articles.index',['articles' => $articles]);
+        return view('articles.index',[
+            'articles' => $articles,
+            'tags' => $tags,
+        ]);
     }
 
     public function create()

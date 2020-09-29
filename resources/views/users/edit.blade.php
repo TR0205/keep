@@ -12,7 +12,7 @@
           <div class="card-body pt-0">
             @include('error_card_list')
             <div class="card-text">
-              <form method="POST" action="{{ route('users.update', ['name' => $user->name]) }}">
+              <form method="POST" action="{{ route('users.update', ['name' => $user->name]) }}" enctype="multipart/form-data">
                 @include('users.form')
                 @method('PATCH')
                 <button type="submit" class="btn btn-block text-white" style="background-color: #21a48f;">更新する</button>

@@ -2,6 +2,7 @@
   <div class="card-body d-flex flex-row">
     <a href="{{ route('users.show', ['name' => $article->user->name]) }}" class="text-dark">
       <i class="fas fa-user-circle fa-3x mr-1"></i>
+      
     </a>
     <div>
       <div class="font-weight-bold">
@@ -23,7 +24,7 @@
             </button>
           </a>
           <div class="dropdown-menu dropdown-menu-right">
-            <a class="dropdown-item" href="{{ route("articles.edit", ['article' => $article]) }}">
+            <a class="dropdown-item" href="{{ route('articles.edit', ['article' => $article]) }}">
               <i class="fas fa-pen mr-1"></i>記事を更新する
             </a>
             <div class="dropdown-divider"></div>

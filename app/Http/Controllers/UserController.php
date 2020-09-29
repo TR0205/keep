@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -98,8 +99,15 @@ class UserController extends Controller
     public function update(Request $request, $name)
     {
         $user = User::where('name', $name)->first();
+
+        if ($request->has('image'))
+        {
+            $image = $request->file('image');
+            $path = Storage::disk('s3')->putFile('keepbacket', $image, 'public');
+            $user->image_path = Storage::disk('s3')->url($path);
+        }
+
         $user->fill($request->all())->save();
-        // dd($user);
 
         $articles = $user->articles->sortByDesc('created_at');
 

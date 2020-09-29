@@ -22,23 +22,49 @@ class TagController extends Controller
 
         $tags = DB::table('tags')
         ->join('article_tag', 'tags.id', '=', 'article_tag.tag_id')
-        ->join('articles', 'article_tag.tag_id', '=', 'articles.id')
+        ->join('articles', 'article_tag.article_id', '=', 'articles.id')
         ->select('tags.id', 'tags.name')
-        ->groupBy('tags.id')
-        ->get();
-
-        if($search !== null)
-        {
+        ->when($search, function ($query, $search) {
             $search_split = mb_convert_kana($search, 's');
             $search_split2 = preg_split('/[\s]+/', $search_split, -1, PREG_SPLIT_NO_EMPTY);
+            return $query->where(function ($query) use ($search_split2) {
+                foreach ($search_split2 as $value) {
+                    $query->where('name', 'like', '%' . $value . '%');
+                }
+            });
+        })
+        ->groupBy('tags.id')
+        ->orderBy('tags.id', 'asc')
+        ->get();
 
-            foreach($search_split2 as $value)
-            {
-                $tags->where('name', 'like', '%'.$value.'%');
-            }
-        };
+        // if($search === null)
+        // {
+        //     $tags = DB::table('tags')
+        //     ->join('article_tag', 'tags.id', '=', 'article_tag.tag_id')
+        //     ->join('articles', 'article_tag.article_id', '=', 'articles.id')
+        //     ->select('tags.id', 'tags.name')
+        //     ->groupBy('tags.id')
+        //     ->orderBy('tags.id', 'asc')
+        //     ->get();
+        // };
 
-        //dd($tags);
+        // if($search !== null)
+        // {
+        //     $search_split = mb_convert_kana($search, 's');
+        //     $search_split2 = preg_split('/[\s]+/', $search_split, -1, PREG_SPLIT_NO_EMPTY);
+
+        //     foreach($search_split2 as $value)
+        //     {
+        //         $tags = DB::table('tags')
+        //         ->join('article_tag', 'tags.id', '=', 'article_tag.tag_id')
+        //         ->join('articles', 'article_tag.article_id', '=', 'articles.id')
+        //         ->select('tags.id', 'tags.name')
+        //         ->groupBy('tags.id')
+        //         ->orderBy('tags.id', 'asc')
+        //         ->where('name', 'like', '%'.$value.'%')
+        //         ->get();
+        //     }
+        // };
 
         return view('tags.index', compact('tags'));
     }

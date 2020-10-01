@@ -4,6 +4,8 @@
       <a href="{{ route('users.show', ['name' => $user->name]) }}" class="text-dark">
         @if ($user->image_path)
           <img src="{{ $user->image_path }}"　class="img-fluid">
+        @else
+          <i class="fas fa-user-circle fa-3x mr-1"></i>
         @endif
       </a>
       @if( Auth::id() === $user->id )

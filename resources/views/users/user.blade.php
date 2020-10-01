@@ -2,7 +2,9 @@
   <div class="card-body">
     <div class="d-flex flex-row">
       <a href="{{ route('users.show', ['name' => $user->name]) }}" class="text-dark">
-        <i class="fas fa-user-circle fa-3x"></i>
+        @if ($user->image_path)
+          <img src="{{ $user->image_path }}"　class="img-fluid">
+        @endif
       </a>
       @if( Auth::id() === $user->id )
         <a class="btn btn-primary ml-auto" href="{{ route('users.edit', ['name' => $user->name]) }}" role="button">ユーザー情報の編集</a>

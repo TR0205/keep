@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class UserController extends Controller
 {
@@ -102,12 +103,23 @@ class UserController extends Controller
 
         if ($request->has('image'))
         {
-            $image = $request->file('image');
-            $path = Storage::disk('s3')->putFile('keepbacket', $image, 'public');
-            $user->image_path = Storage::disk('s3')->url($path);
+            $file = $request->file('image');
+            $extension = $request->file('image')->getClientOriginalExtension();
+            $filename = $request->file('image')->getClientOriginalName();
+            $resize_img = Image::make($file)->resize(50, 50)->encode($extension);
+            $path = Storage::disk('s3')->put('/keepbacket/'.$filename,(string)$resize_img, 'public');
+            $user->image_path = Storage::disk('s3')->url('keepbacket/'.$filename);
         }
 
+        // if ($request->has('image'))
+        // {
+        //     $image = $request->file('image');
+        //     $path = Storage::disk('s3')->putFile('keepbacket', $image, 'public');
+        //     $user->image_path = Storage::disk('s3')->url($path);
+        // }
+
         $user->fill($request->all())->save();
+        // dd($user);
 
         $articles = $user->articles->sortByDesc('created_at');
 
@@ -115,10 +127,5 @@ class UserController extends Controller
             'user' => $user,
             'articles' => $articles,
         ]);
-
-        // return redirect()->route('users.show', [
-        //     'user' => $user->name,
-        //     'articles' => $articles,
-        //     ]);
     }
 }

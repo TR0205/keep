@@ -111,16 +111,8 @@ class UserController extends Controller
             $user->image_path = Storage::disk('s3')->url('keepbacket/'.$filename);
         }
 
-        // if ($request->has('image'))
-        // {
-        //     $image = $request->file('image');
-        //     $path = Storage::disk('s3')->putFile('keepbacket', $image, 'public');
-        //     $user->image_path = Storage::disk('s3')->url($path);
-        // }
-
         $user->fill($request->all())->save();
         // dd($user);
-
         $articles = $user->articles->sortByDesc('created_at');
 
         return view('users.show', [

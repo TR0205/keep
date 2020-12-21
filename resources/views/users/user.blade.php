@@ -8,8 +8,12 @@
           <i class="fas fa-user-circle fa-3x mr-1"></i>
         @endif
       </a>
-      @if( Auth::id() === $user->id )
+      @if( Auth::id() === $user->id && Auth::id() !== 17 )
         <a class="btn btn-primary ml-auto" href="{{ route('users.edit', ['name' => $user->name]) }}" role="button">ユーザー情報の編集</a>
+      @endif
+
+      @if( Auth::id() === 17 )
+        <a class="btn btn-primary ml-auto" role="button">ゲストユーザーの編集はできません</a>
       @endif
 
       @if( Auth::id() !== $user->id )

@@ -9,6 +9,8 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 
+use Illuminate\Support\Facades\Auth;
+
 class LoginController extends Controller
 {
     /*
@@ -62,6 +64,18 @@ class LoginController extends Controller
             'email' => $providerUser->getEmail(),
             'token' => $providerUser->token,
         ]);
+    }
+
+    public function guestLogin(){
+        $name = 'guest';
+        $password = 'guestpass';
+        $email = 'guest@gmail.com';
+
+        if(Auth::attempt(['name' => $name, 'password' => $password, 'email' => $email])){
+            return redirect('/');
+        }
+
+        return redirect('/login');
     }
 
 }
